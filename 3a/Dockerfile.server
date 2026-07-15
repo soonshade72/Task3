@@ -1,0 +1,12 @@
+FROM python
+WORKDIR /myapp
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    apt-get clean
+COPY . .
+RUN mkdir -p backups music cache
+RUN pip install yt-dlp
+RUN pip install pymysql
+RUN pip install cryptography
+
+CMD ["python","server.py"]
